@@ -1,13 +1,13 @@
-"""AWS"""
+"""AWS services"""
 
-from albertv0 import *
+from albert import *
+import os
 
-__iid__ = "PythonInterface/v0.1"
-__prettyname__ = "Amazon web service"
-__version__ = "0.1"
-__trigger__ = "aws "
-__author__ = "Bharat kalluri"
-__dependencies__ = []
+__title__ = "AWS services"
+__doc__ = "Shortcuts to AWS services"
+__version__ = "0.2.0"
+__triggers__ = "aws "
+__author__ = ["Bharat Kalluri", "AirOnSkin"]
 
 AWS_SERVICES_LIST = [
     {
@@ -88,10 +88,12 @@ def handleQuery(query):
         clean_query = query.string.replace(" ", "")
         filtered_list = AWS_SERVICES_LIST
         if len(clean_query) > 1:
-            filtered_list = [el for el in filtered_list if clean_query in el['name'].lower()]
+            filtered_list = [
+                el for el in filtered_list if clean_query in el['name'].lower()]
         if clean_query:
             return [Item(
-                id=__prettyname__,
+                icon=os.path.dirname(__file__)+"/plugin.svg",
+                id=__title__,
                 text=el['name'],
                 actions=[UrlAction(f"Open {el['name']}", el['url'])]
             ) for el in filtered_list]
