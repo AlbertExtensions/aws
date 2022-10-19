@@ -1,6 +1,7 @@
 """AWS services"""
 
 from albert import *
+import os
 
 __title__ = "AWS services"
 __doc__ = "Shortcuts to AWS services"
@@ -91,6 +92,7 @@ def handleQuery(query):
                 el for el in filtered_list if clean_query in el['name'].lower()]
         if clean_query:
             return [Item(
+                icon=os.path.dirname(__file__)+"/plugin.svg",
                 id=__title__,
                 text=el['name'],
                 actions=[UrlAction(f"Open {el['name']}", el['url'])]
